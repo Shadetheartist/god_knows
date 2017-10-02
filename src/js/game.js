@@ -3,20 +3,21 @@ function Game(canvas, bounds) {
     this.ctx = canvas.getContext('2d');
     this.bounds = bounds;
     this.player = null;
+
     this.quadtree = new Quadtree.init({
         x: bounds.x,
         y: bounds.y,
         w: bounds.w,
         h: bounds.h,
         maxChildren: 4,
-        maxDepth: 5
+        maxDepth: 3
     });
+
     this.state = 1;
     this.gravity = 0.4;
     this.lastUpdateTime = Date.now();
     this.targetFramerate = 60;
     this.boxes = [];
-
 }
 
 Game.prototype.updateQuadTree = function () {

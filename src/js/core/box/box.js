@@ -1,5 +1,5 @@
 function Box(x, y, w, h) {
-    this.rect = new Rectangle(x, y, w, h);
+    this.rect = new Rectangle(x, y, w, h, this);
     this.color = "#BBB";
 }
 
