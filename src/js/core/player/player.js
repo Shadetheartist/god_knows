@@ -139,8 +139,8 @@ Player.prototype.constrainToBounds = function (bounds) {
         this.rect.x = bounds.x;
         this.accel.x *= -this.bounciness;
         this.touching.push(bounds);
-    } else if (this.rect.x + this.rect.w > bounds.w) {
-        this.rect.x = bounds.w - this.rect.w;
+    } else if (this.rect.x + this.rect.w > bounds.x + bounds.w) {
+        this.rect.x = (bounds.x + bounds.w) - this.rect.w;
         this.accel.x *= -this.bounciness;
         this.touching.push(bounds);
     }
@@ -149,8 +149,8 @@ Player.prototype.constrainToBounds = function (bounds) {
         this.rect.y = bounds.y;
         this.accel.y *= -this.bounciness;
         this.touching.push(bounds);
-    } else if (this.rect.y + this.rect.h > bounds.h) {
-        this.rect.y = bounds.h - this.rect.h;
+    } else if (this.rect.y + this.rect.h > bounds.y + bounds.h) {
+        this.rect.y = (bounds.y + bounds.h) - this.rect.h;
         this.accel.y *= -this.bounciness;
         this.touching.push(bounds);
         this.grounded.push(bounds);

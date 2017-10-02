@@ -4,7 +4,7 @@ var testArea = TestArea();
 testArea.start();
 
 function TestArea() {
-    var bounds = {x: 0, y: 0, w: 800, h: 400};
+    var bounds = {x: -800, y: 0, w: 1600, h: 400};
 
     var game = new Game(document.getElementById('gameCanvas'), bounds);
 
