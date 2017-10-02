@@ -1,10 +1,16 @@
-
 function Game(canvas, bounds) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
     this.bounds = bounds;
     this.player = null;
-    this.quadTree = new Quadtree(this.bounds);
+    this.quadtree = new Quadtree.init({
+        x: bounds.x,
+        y: bounds.y,
+        w: bounds.w,
+        h: bounds.h,
+        maxChildren: 4,
+        maxDepth: 5
+    });
     this.state = 1;
     this.gravity = 0.4;
     this.lastUpdateTime = Date.now();
@@ -14,13 +20,12 @@ function Game(canvas, bounds) {
 }
 
 Game.prototype.updateQuadTree = function () {
-    this.quadTree.insert(this.player);
 
-    for(var i = 0; i < this.boxes.length; i++){
-        this.quadTree.insert(this.boxes[i].rect);
+    for (var i = 0; i < this.boxes.length; i++) {
+        this.quadtree.insert(this.boxes[i].rect);
     }
 
-    this.quadTree.insert(this.player);
+    this.quadtree.insert(this.player.rect);
 
 };
 
@@ -28,11 +33,11 @@ Game.prototype.update = function () {
 
     var now = Date.now();
 
-    var dt = (now - this.lastUpdateTime) * (this.targetFramerate/1000);
+    var dt = (now - this.lastUpdateTime) * (this.targetFramerate / 1000);
 
     this.updateQuadTree();
 
-    for(var i = 0; i < this.boxes.length; i++){
+    for (var i = 0; i < this.boxes.length; i++) {
         this.boxes[i].update(this, dt);
     }
 
@@ -60,20 +65,22 @@ Game.prototype.render = function () {
 
     this.env.render(this.ctx);
 
-    for(var i = 0; i < this.boxes.length; i++){
+    for (var i = 0; i < this.boxes.length; i++) {
         this.boxes[i].render(this.ctx);
     }
 
     this.player.render(this.ctx);
 
+    this.quadtree.render(this.ctx);
+
     this.ctx.restore();
 };
 
 Game.prototype.tick = function () {
-    if(this.state === 1) {
-        this.render();
+    if (this.state === 1) {
         this.update();
-        this.quadTree.clear();
+        this.render();
+        this.quadtree.clear();
         window.requestAnimationFrame(this.tick.bind(this));
     }
 };

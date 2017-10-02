@@ -1,5 +1,5 @@
 function Player(pos) {
-    this.rect  = new Rectangle(0, 0, 10, 10);
+    this.rect  = new Rectangle(0, 0, 10, 10, this);
 
     this.accel = new Point();
     this.moveAccel = new Point();
@@ -20,7 +20,16 @@ function Player(pos) {
 }
 
 Player.prototype.getCollidingBoxes = function (game) {
-    game.quadTree.retrieve();
+};
+
+Player.prototype.handleBoxCollisions = function (game) {
+    return game.quadtree.retrieve(this.rect, function (obj) {
+        if(obj.parent === this){
+            return;
+        }
+
+        console.log(obj);
+    }.bind(this));
 };
 
 Player.prototype.update = function (game, dt) {
@@ -58,6 +67,7 @@ Player.prototype.update = function (game, dt) {
     this.touching.length = 0;
     this.grounded.length = 0;
 
+    this.handleBoxCollisions(game);
 
     this.constrainToBounds(game.bounds);
 
@@ -83,14 +93,6 @@ Player.prototype.render = function (ctx) {
         this.rect.w,
         this.rect.h
     );
-};
-
-Player.prototype.getHorizontalDir = function () {
-    return Math.sign(this.accel.x);
-};
-
-Player.prototype.getVerticalDirection = function () {
-    return Math.sign(this.accel.y);
 };
 
 Player.prototype.jump = function () {
@@ -126,8 +128,6 @@ Player.prototype.move = function (horizontalDir) {
             mod += 2;
         }
     }
-
-
 
     var accel = this.accel.x + this.speed * horizontalDir * mod;
 

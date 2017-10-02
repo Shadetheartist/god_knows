@@ -1,5 +1,6 @@
 
-function Rectangle(x, y, w ,h){
+function Rectangle(x, y, w, h, parent){
+    this.parent = parent || null;
     this.x = x || 0;
     this.y = y || 0;
     this.w = w || 0;
