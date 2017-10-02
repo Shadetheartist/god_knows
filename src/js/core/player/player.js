@@ -4,14 +4,14 @@ function Player(pos)
 
     this.accel = new Point();
     this.moveAccel = new Point();
-    this.maxSpeed = 9;
+    this.maxSpeed = 7.5;
 
     this.bounciness = 0.075;
     this.decel = 0.70;
-    this.airDecel = 0.96;
-    this.acceleration = 0.5;
+    this.airDecel = 0.92;
+    this.acceleration = 0.4;
 
-    this.jumpStrength = 7.5;
+    this.jumpStrength = 6.25;
 
     //amount of horizontal momentum is transferred into vertical
     this.jumpTransferAmount = 0.075;
@@ -52,13 +52,12 @@ Player.prototype.update = function (game, dt)
     //reduce effect of gravity when holding 'up' by a bit (while going up)
     if (Keys[Keys.up] && this.accel.y < 0)
     {
-        this.accel.y += game.gravity * 0.8;
+        this.accel.y += game.gravity * 0.625;
     }
     else
     {
         this.accel.y += game.gravity;
     }
-
 
     this.rect.x += this.accel.x * dt;
     this.rect.y += this.accel.y * dt;
@@ -215,16 +214,15 @@ Player.prototype.isInAir = function ()
 
 Player.prototype.move = function (horizontalDir)
 {
-
     var mod = 1;
 
     if (this.isInAir() === true)
     {
-        mod = 0.3;
+        mod = 0.25;
         //make movement stronger when trying to turn around (weaker in air)
         if (Math.sign(horizontalDir) !== Math.sign(this.accel.x))
         {
-            mod += 0.6;
+            mod += 1;
         }
     }
     else
@@ -232,7 +230,7 @@ Player.prototype.move = function (horizontalDir)
         //make movement stronger when trying to turn around
         if (Math.sign(horizontalDir) !== Math.sign(this.accel.x))
         {
-            mod += .75;
+            mod += 1.25;
         }
     }
 
