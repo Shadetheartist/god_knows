@@ -14,7 +14,6 @@ function Game(canvas, bounds) {
     });
 
     this.state = 1;
-    this.gravity = 0.4;
     this.lastUpdateTime = Date.now();
     this.targetFramerate = 60;
     this.boxes = [];
@@ -45,9 +44,26 @@ Game.prototype.update = function () {
     this.player.update(this, dt);
 
     this.ctx.camera.update();
-
+    
+    this.updateCamera();
+    
     this.lastUpdateTime = now;
 };
+
+Game.prototype.updateCamera = function (game)
+{
+    this.ctx.camera.target = {
+        x: this.player.rect.x,
+        y: this.player.rect.y * -0.1
+    };
+    
+    var zoom = 1 - (Math.sqrt(this.player.accel.x * this.player.accel.x + this.player.accel.y * this.player.accel.y) / 250);
+    
+    this.ctx.camera.zoomTarget = {
+        x: zoom,
+        y: zoom
+    };
+}
 
 Game.prototype.render = function () {
 

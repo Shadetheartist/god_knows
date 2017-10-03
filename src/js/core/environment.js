@@ -3,6 +3,7 @@ function Environment(bounds)
 {
     this.bounds = bounds;
     this.airResist = 0.1;
+    this.gravity = 0.4;
 
     this.backgroundColor = "#7b8dff";
     this.darkSpace = 10000;

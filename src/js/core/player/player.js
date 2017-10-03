@@ -3,7 +3,6 @@ function Player(pos)
     this.rect = new Rectangle(0, 0, 10, 10, this);
 
     this.accel = new Point();
-    this.moveAccel = new Point();
     this.maxSpeed = 7.5;
 
     this.bounciness = 0.075;
@@ -22,12 +21,11 @@ function Player(pos)
 
 Player.prototype.update = function (game, dt)
 {
-
-    if (Keys[Keys.left])
+    if (Keys.isPressed(Keys.left))
     {
         this.move(-1);
     }
-    else if (Keys[Keys.right])
+    else if (Keys.isPressed(Keys.right))
     {
         this.move(1);
     }
@@ -44,19 +42,19 @@ Player.prototype.update = function (game, dt)
         }
     }
 
-    if (Keys[Keys.up])
+    if (Keys.isPressed(Keys.up))
     {
         this.jump();
     }
 
     //reduce effect of gravity when holding 'up' by a bit (while going up)
-    if (Keys[Keys.up] && this.accel.y < 0)
+    if (Keys.isPressed(Keys.up) && this.accel.y < 0)
     {
-        this.accel.y += game.gravity * 0.625;
+        this.accel.y += game.env.gravity * 0.625;
     }
     else
     {
-        this.accel.y += game.gravity;
+        this.accel.y += game.env.gravity;
     }
 
     this.rect.x += this.accel.x * dt;
@@ -64,22 +62,10 @@ Player.prototype.update = function (game, dt)
 
     this.touching.length = 0;
     this.grounded.length = 0;
-
+    
     this.handleBoxCollisions(game);
 
     this.constrainToBounds(game.bounds);
-
-    game.ctx.camera.target = {
-        x: this.rect.x,
-        y: this.rect.y * -0.1
-    };
-
-    var zoom = 1 - (Math.sqrt(this.accel.x * this.accel.x + this.accel.y * this.accel.y) / 250);
-
-    game.ctx.camera.zoomTarget = {
-        x: zoom,
-        y: zoom
-    };
 
 };
 
@@ -94,104 +80,6 @@ Player.prototype.render = function (ctx)
     );
 };
 
-
-Player.prototype.handleBoxCollisions = function (game)
-{
-    return game.quadtree.retrieve(this.rect, function (obj)
-    {
-        //dont collide with self
-        if (obj.parent === this)
-        {
-            return;
-        }
-
-        var a = this.rect;
-        var b = obj;
-
-        if (this.rect.isCollide(b))
-        {
-            game.ctx.strokeRect(b.x, b.y, b.w, b.h);
-
-            var centerA = new Point(a.x + a.w / 2, a.y + a.h / 2);
-            var centerB = new Point(b.x + b.w / 2, b.y + b.h / 2);
-            var temp = new Point(0, 0);
-
-            if (centerA.x > centerB.x)
-            {
-                temp.x = a.x;
-            }
-            else
-            {
-                temp.x = a.x + a.w;
-            }
-
-            if (centerA.y > centerB.y)
-            {
-                temp.y = a.y;
-            }
-            else
-            {
-                temp.y = a.y + a.h;
-            }
-
-            centerA = temp;
-
-            var distance = new Point(centerB.x - centerA.x, centerB.y - centerA.y);
-            distance.normalize();
-
-
-            if (Math.abs(distance.x) / (b.w / b.h) > Math.abs(distance.y))
-            {
-                //a is on right of b
-                if (distance.x > 0)
-                {
-                    //makes sure the player is going the right direction to latch
-                    if (this.accel.x > 0)
-                    {
-                        a.x = b.x - a.w;
-                        this.accel.x = 0;
-                    }
-                }
-                //a is left right of b
-                else
-                {
-                    //makes sure the player is going the right direction to latch
-                    if (this.accel.x < 0)
-                    {
-                        a.x = b.x + b.w;
-                        this.accel.x = 0;
-                    }
-                }
-
-            }
-            else
-            {
-                //a is on top of b
-                if (distance.y > 0)
-                {
-                    //player has to 'fall' onto a block, cant be going up and latch to the top
-                    if (this.accel.y > 0)
-                    {
-                        this.grounded.push(b);
-                        this.accel.y = 0;
-                        a.y = b.y - a.h;
-                    }
-                }
-                //a is below of b
-                else
-                {
-                    if (this.accel.y < 0)
-                    {
-                        this.rect.y -= this.rect.y;
-                        a.y = b.y + b.h;
-                        this.accel.y = 0;
-                    }
-                }
-
-            }
-        }
-    }.bind(this));
-};
 
 Player.prototype.jump = function ()
 {
@@ -268,4 +156,103 @@ Player.prototype.constrainToBounds = function (bounds)
         this.grounded.push(bounds);
     }
 
+};
+
+
+Player.prototype.handleBoxCollisions = function (game)
+{
+    return game.quadtree.retrieve(this.rect, function (obj)
+    {
+        //dont collide with self
+        if (obj.parent === this)
+        {
+            return;
+        }
+        
+        var a = this.rect;
+        var b = obj;
+        
+        if (this.rect.isCollide(b))
+        {
+            game.ctx.strokeRect(b.x, b.y, b.w, b.h);
+            
+            var centerA = new Point(a.x + a.w / 2, a.y + a.h / 2);
+            var centerB = new Point(b.x + b.w / 2, b.y + b.h / 2);
+            var temp = new Point(0, 0);
+            
+            if (centerA.x > centerB.x)
+            {
+                temp.x = a.x;
+            }
+            else
+            {
+                temp.x = a.x + a.w;
+            }
+            
+            if (centerA.y > centerB.y)
+            {
+                temp.y = a.y;
+            }
+            else
+            {
+                temp.y = a.y + a.h;
+            }
+            
+            centerA = temp;
+            
+            var distance = new Point(centerB.x - centerA.x, centerB.y - centerA.y);
+            distance.normalize();
+            
+            
+            if (Math.abs(distance.x) / (b.w / b.h) > Math.abs(distance.y))
+            {
+                //a is on right of b
+                if (distance.x > 0)
+                {
+                    //makes sure the player is going the right direction to latch
+                    if (this.accel.x > 0)
+                    {
+                        a.x = b.x - a.w;
+                        this.accel.x = 0;
+                    }
+                }
+                //a is left right of b
+                else
+                {
+                    //makes sure the player is going the right direction to latch
+                    if (this.accel.x < 0)
+                    {
+                        a.x = b.x + b.w;
+                        this.accel.x = 0;
+                    }
+                }
+                
+            }
+            else
+            {
+                //a is on top of b
+                if (distance.y > 0)
+                {
+                    //player has to 'fall' onto a block, cant be going up and latch to the top
+                    if (this.accel.y > 0)
+                    {
+                        this.grounded.push(b);
+                        this.accel.y = 0;
+                        a.y = b.y - a.h;
+                    }
+                }
+                //a is below of b
+                else
+                {
+                    if (this.accel.y < 0)
+                    {
+                        this.rect.y -= this.rect.y;
+                        a.y = b.y + b.h;
+                        this.accel.y = 0;
+                    }
+                }
+                
+            }
+        }
+    }.bind(this));
 };

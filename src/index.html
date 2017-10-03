@@ -1,20 +1,59 @@
-<head>
-    <link rel="stylesheet" href="css/site.css"/>
-</head>
-<body>
-    <div>
-        <canvas id="gameCanvas" width="1200" height="720"></canvas>
-    </div>
+<html>
 
-    <script src="js/core/quadtree/quadtree.js"></script>
-    <script src="js/core/keys.js"></script>
-    <script src="js/core/mouse.js"></script>
-    <script src="js/core/camera.js"></script>
-    <script src="js/core/point.js"></script>
-    <script src="js/core/rectangle.js"></script>
-    <script src="js/core/environment.js"></script>
-    <script src="js/core/box/box.js"></script>
-    <script src="js/core/player/player.js"></script>
-    <script src="js/game.js"></script>
-    <script src="js/god-knows.js"></script>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/site.css"/>
+</head>
+
+<body>
+
+<div class="container">
+	<div class="row">
+		<div class="game col-md-8">
+			<canvas id="game-canvas" width="1200" height="720"></canvas>
+		</div>
+		<div class="options col-md-4">
+			<div class="col-md-12">
+				<p>Player Acceleration</p>
+				<div class="bezier-option">
+					<canvas id="accel-bez" width="200" height="200"></canvas>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						Max Speed
+					</div>
+					<div class="col-md-8">
+						<input id="player-accel-t" type="number" step="any" class="time" value="1"/>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="js/core/quadtree/quadtree.js"></script>
+
+<script src="js/core/bezier/bezier.js"></script>
+<script src="js/core/bezier/draw.2.js"></script>
+<script src="js/core/bezier/interaction.2.js"></script>
+
+<script src="js/core/keys.js"></script>
+<script src="js/core/mouse.js"></script>
+<script src="js/core/camera.js"></script>
+<script src="js/core/point.js"></script>
+<script src="js/core/rectangle.js"></script>
+<script src="js/core/environment.js"></script>
+<script src="js/core/box/box.js"></script>
+<script src="js/core/player/player.js"></script>
+<script src="js/game.js"></script>
+<script src="js/god-knows.js"></script>
+
 </body>
+
+</html>
