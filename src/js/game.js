@@ -35,6 +35,11 @@ Game.prototype.update = function () {
 
     var dt = (now - this.lastUpdateTime) * (this.targetFramerate / 1000);
 
+    if(dt > 5){
+        console.log(dt);
+        dt = 0;
+    }
+
     this.updateQuadTree();
 
     for (var i = 0; i < this.boxes.length; i++) {
