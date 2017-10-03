@@ -17,8 +17,12 @@ function Player (pos)
 
 	//amount of horizontal momentum is transferred into vertical
 	this.jumpTransferAmount = 0.075;
-	this.jumpDelay          = 75;
-	this.jumpCooldown       = new CoolDown(200)
+	this.jumpDelay          = 5;
+	this.jumpCooldown       = new CoolDown(20);
+
+	//0 = not jumping, 1 = preparing, 2 = jumping
+	this.jumpState = 0;
+	this.jumpBoost = 0;
 
 	this.touching = [];
 	this.grounded = [];
@@ -48,7 +52,7 @@ Player.prototype.update = function(game)
 
 	if (Keys.isPressed(Keys.up))
 	{
-		this.beginJump();
+		this.beginJump(game);
 	}
 
 	//reduce effect of gravity when holding 'up' by a bit (while going up)
@@ -93,24 +97,31 @@ Player.prototype.render = function(ctx)
 	);
 };
 
-Player.prototype.beginJump = function()
+Player.prototype.beginJump = function(game)
 {
-	if (this.jumpCooldown.canTrigger())
+	if (this.jumpCooldown.canTrigger(game.tick))
 	{
+		this.onPrepareJump();
+
+		this.jumpState = 1;
+
 		if (this.isInAir() === true)
 		{
 			return;
 		}
 
-		this.jumpCooldown.trigger();
+		this.jumpCooldown.trigger(game.tick);
 
 		this.rect.y += this.rect.h * 0.5;
+		this.accel.x *= 0.5;
 
 		this.rect.w *= 1.35;
 		this.rect.h *= 0.65;
 
-		setTimeout(function()
+		game.setTickTimeout(function()
 		{
+			this.jumpState = 2;
+
 			this.jump();
 
 			this.rect.w = this.standardRect.w;
@@ -122,6 +133,8 @@ Player.prototype.beginJump = function()
 
 Player.prototype.jump = function()
 {
+	this.onJump();
+
 	var transfer = Math.abs(this.accel.x) * this.jumpTransferAmount;
 
 	this.rect.y -= 1;
@@ -147,6 +160,10 @@ Player.prototype.move = function(horizontalDir)
 		{
 			mod += 1;
 		}
+	}
+	else if (this.jumpState === 1)
+	{
+		mod = 0.1;
 	}
 	else
 	{
@@ -189,6 +206,8 @@ Player.prototype.constrainToBounds = function(bounds)
 		this.accel.y *= -this.bounciness;
 		this.touching.push(bounds);
 		this.grounded.push(bounds);
+		this.onGrounded();
+
 	}
 
 };
@@ -270,6 +289,7 @@ Player.prototype.handleBoxCollisions = function(game)
 					if (this.accel.y > 0)
 					{
 						this.grounded.push(b);
+						this.onGrounded();
 						this.accel.y = 0;
 						a.y          = b.y - a.h;
 					}
@@ -288,4 +308,17 @@ Player.prototype.handleBoxCollisions = function(game)
 			}
 		}
 	}.bind(this));
+};
+
+Player.prototype.onGrounded = function()
+{
+	this.jumpState = 0;
+};
+
+Player.prototype.onJump = function()
+{
+};
+
+Player.prototype.onPrepareJump = function()
+{
 };

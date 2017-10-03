@@ -9,25 +9,25 @@
 
 <div class="container">
 	<div class="row">
-		<div class="game col-md-8">
+		<div class="game col-xs-8">
 			<canvas id="game-canvas" width="1200" height="720"></canvas>
 		</div>
-		<div class="options col-md-4">
-			<div class="col-md-12">
+		<div class="options col-xs-4">
+			<div class="col-xs-12">
 				<p>Player Acceleration</p>
 				<div class="bezier-option">
 					<canvas id="accel-bez" width="200" height="200"></canvas>
 				</div>
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-xs-4">
 						Max Speed
 					</div>
-					<div class="col-md-8">
+					<div class="col-xs-8">
 						<input id="player-accel-t" type="number" step="any" class="time" value="1"/>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-6">
+			<div class="col-xs-6">
 
 			</div>
 		</div>
@@ -45,6 +45,7 @@
 
 <script src="js/core/keys.js"></script>
 <script src="js/core/mouse.js"></script>
+<script src="js/core/event.js"></script>
 <script src="js/core/camera.js"></script>
 <script src="js/core/point.js"></script>
 <script src="js/core/cooldown/cooldown.js"></script>
@@ -53,6 +54,7 @@
 <script src="js/core/box/box.js"></script>
 <script src="js/core/player/player.js"></script>
 <script src="js/game.js"></script>
+<script src="js/core/util.js"></script>
 <script src="js/god-knows.js"></script>
 
 </body>

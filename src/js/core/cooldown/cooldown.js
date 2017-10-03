@@ -1,23 +1,23 @@
 function CoolDown(coolDownTime, callback){
-	this.coolDownTime = coolDownTime;
-	this.callback = callback;
-	this.lastTriggered = Date.now();
+	this.coolDownTicks = coolDownTime;
+	this.callback      = callback;
+	this.lastTriggered = 0;
 }
 
-CoolDown.prototype.trigger = function()
+CoolDown.prototype.trigger = function(tick)
 {
-	if(this.canTrigger() == false){
+	if(this.canTrigger(tick) == false){
 		return null;
 	}
 
-	this.lastTriggered = Date.now();
+	this.lastTriggered = tick;
 
 	if(this.callback && this.callback instanceof Function){
 		return this.callback();
 	}
 };
 
-CoolDown.prototype.canTrigger = function()
+CoolDown.prototype.canTrigger = function(tick)
 {
-	return (this.lastTriggered + this.coolDownTime < Date.now());
+	return (this.lastTriggered + this.coolDownTicks < tick);
 };

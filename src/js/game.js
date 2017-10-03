@@ -2,7 +2,8 @@ function Game(canvas, bounds) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
     this.bounds = bounds;
-    this.player = null;
+	this.player = null;
+	this.tick = 0;
 
     this.quadtree = new Quadtree.init({
         x: bounds.x,
@@ -98,17 +99,21 @@ Game.prototype.render = function () {
     this.ctx.restore();
 };
 
-Game.prototype.tick = function () {
+Game.prototype.loop = function () {
     if (this.state === 1) {
         this.update();
         this.render();
         this.quadtree.clear();
-        window.requestAnimationFrame(this.tick.bind(this));
+        window.requestAnimationFrame(this.loop.bind(this));
     }
+
+	this.updateTickTimeouts();
+
+	this.tick++;
 };
 
 Game.prototype.start = function () {
-    window.requestAnimationFrame(this.tick.bind(this));
+    this.loop();
 };
 
 Game.prototype.stop = function () {
