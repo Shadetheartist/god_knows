@@ -17,12 +17,14 @@ define(['core/viewport/texture-helper'], function(TextureHelper)
 	{
 		var rect = {x: 100, y: 100, w: 200, h: 100};
 
-		this.ctx.strokeStyle = "#000"
+		this.ctx.strokeStyle = "#000";
 
 		this.ctx.strokeRect(rect.x, rect.y, rect.w, rect.h);
 
-		//TextureHelper.Rectangle.Lines.vertical(this.ctx, rect, 4);
-		//TextureHelper.Rectangle.Lines.horizontal(this.ctx, rect);
+        TextureHelper.Rectangle.dots(this.ctx, rect, 10);
+
+        //TextureHelper.Rectangle.Lines.vertical(this.ctx, rect, 8);
+		//TextureHelper.Rectangle.Lines.horizontal(this.ctx, rect, 8);
 		TextureHelper.Rectangle.Lines.diagonal(this.ctx, rect);
 	};
 
