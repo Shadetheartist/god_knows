@@ -27,7 +27,8 @@ define(['core/viewport/texture-helper'], function(TextureHelper)
 		//TextureHelper.Rectangle.Lines.horizontal(this.ctx, rect, 8);
         //TextureHelper.Rectangle.Lines.diagonal(this.ctx, rect, 10, {x: 1, y: 1});
         //TextureHelper.Rectangle.Lines.diagonal(this.ctx, rect,10, {x: 1, y: -1});
-        TextureHelper.Rectangle.Lines.diagonal(this.ctx, rect);
+        TextureHelper.Rectangle.Lines.diagonal(this.ctx, rect, 10, {x: 1, y: 1});
+        TextureHelper.Rectangle.Lines.diagonal(this.ctx, rect, 10, {x: -1, y: 1});
 	};
 
 	Viewport.prototype.renderResolutionGrid = function(gap, opacity)

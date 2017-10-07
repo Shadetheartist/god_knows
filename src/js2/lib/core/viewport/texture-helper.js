@@ -80,7 +80,7 @@ define(function ()
     {
         gap = gap || 10;
 
-        direction = direction || {x: -0.25, y: 1};
+        direction = direction || {x: 1, y: 1};
 
         if(direction.y < 0){
             direction.y *= -1;
@@ -88,7 +88,7 @@ define(function ()
 
         var angle = Math.atan2(direction.y, direction.x);
 
-        if(direction >= 0){
+        if(direction.x >= 0){
             TextureHelper.Rectangle.Lines.angle(ctx, bounds, gap, angle)
 
         }else{
