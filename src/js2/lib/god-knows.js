@@ -10,11 +10,6 @@ require(['core/game', 'core/viewport/viewport', 'core/editor/editor'], function(
 
     var editorElem = gameElem.find('editor').eq(0)[0];
     var editor = new Editor(editorElem);
-	editor.addBinding('fucl', test);
-
-    test.value = 100;
-
-    editor.update();
 
     var game = new Game(viewport, editor);
 

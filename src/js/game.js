@@ -1,6 +1,6 @@
 function Game(canvas, bounds) {
     this.canvas = canvas;
-    this.ctx = canvas.getContext('2d');
+    this.frontContext = canvas.getContext('2d');
     this.bounds = bounds;
 	this.player = null;
 	this.tick = 0;
@@ -49,7 +49,7 @@ Game.prototype.update = function () {
 
     this.player.update(this, dt);
 
-    this.ctx.camera.update();
+    this.frontContext.camera.update();
     
     this.updateCamera();
     
@@ -58,14 +58,14 @@ Game.prototype.update = function () {
 
 Game.prototype.updateCamera = function (game)
 {
-    this.ctx.camera.target = {
+    this.frontContext.camera.target = {
         x: this.player.rect.x,
         y: this.player.rect.y * -0.1
     };
     
     var zoom = 1 - (Math.sqrt(this.player.accel.x * this.player.accel.x + this.player.accel.y * this.player.accel.y) / 250);
     
-    this.ctx.camera.zoomTarget = {
+    this.frontContext.camera.zoomTarget = {
         x: zoom,
         y: zoom
     };
@@ -73,30 +73,30 @@ Game.prototype.updateCamera = function (game)
 
 Game.prototype.render = function () {
 
-    this.ctx.clearRect(this.bounds.x, this.bounds.y, this.bounds.w, this.bounds.h);
+    this.frontContext.clearRect(this.bounds.x, this.bounds.y, this.bounds.w, this.bounds.h);
 
-    this.ctx.save();
+    this.frontContext.save();
 
-    this.ctx.translate(this.canvas.width / 2 - (this.bounds.w / 2), this.canvas.height / 2 - (this.bounds.h / 2));
-    this.ctx.translate(-this.ctx.camera.offset.x + this.bounds.w / 2, this.ctx.camera.offset.y);
+    this.frontContext.translate(this.canvas.width / 2 - (this.bounds.w / 2), this.canvas.height / 2 - (this.bounds.h / 2));
+    this.frontContext.translate(-this.frontContext.camera.offset.x + this.bounds.w / 2, this.frontContext.camera.offset.y);
 
     //scale to middle of bounds (probably needs to be changed at some point)
-    this.ctx.translate((this.bounds.w / 2), (this.bounds.h / 2));
-    this.ctx.scale(this.ctx.camera.zoom.x, this.ctx.camera.zoom.y);
-    this.ctx.translate(-(this.bounds.w / 2), -(this.bounds.h / 2));
+    this.frontContext.translate((this.bounds.w / 2), (this.bounds.h / 2));
+    this.frontContext.scale(this.frontContext.camera.zoom.x, this.frontContext.camera.zoom.y);
+    this.frontContext.translate(-(this.bounds.w / 2), -(this.bounds.h / 2));
 
 
-    this.env.render(this.ctx);
+    this.env.render(this.frontContext);
 
     for (var i = 0; i < this.boxes.length; i++) {
-        this.boxes[i].render(this.ctx);
+        this.boxes[i].render(this.frontContext);
     }
 
-    this.player.render(this.ctx);
+    this.player.render(this.frontContext);
 
-    this.quadtree.render(this.ctx);
+    this.quadtree.render(this.frontContext);
 
-    this.ctx.restore();
+    this.frontContext.restore();
 };
 
 Game.prototype.loop = function () {

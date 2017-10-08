@@ -227,7 +227,7 @@ Player.prototype.handleBoxCollisions = function(game)
 
 		if (this.rect.isCollide(b))
 		{
-			game.ctx.strokeRect(b.x, b.y, b.w, b.h);
+			game.frontContext.strokeRect(b.x, b.y, b.w, b.h);
 
 			var centerA = new Point(a.x + a.w / 2, a.y + a.h / 2);
 			var centerB = new Point(b.x + b.w / 2, b.y + b.h / 2);

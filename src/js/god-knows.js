@@ -10,7 +10,7 @@ function TestArea ()
 
 	game.player     = new Player();
 	game.env        = new Environment(bounds);
-	game.ctx.camera = new Camera(bounds);
+	game.frontContext.camera = new Camera(bounds);
 
 	game.boxes.push(new Box(50, 350, 50, 50));
 	game.boxes.push(new Box(100, 300, 100, 100));
