@@ -9,28 +9,22 @@ define(function ()
 
     TextureHelper.Rectangle.dots = function (ctx, bounds, gap)
     {
-        gap = gap || 8;
+        gap = gap || 10;
         var x = bounds.x;
         var x2 = bounds.x + bounds.w;
 
         var y = bounds.y;
         var y2 = bounds.y + bounds.h;
 
-        ctx.beginPath();
-
         for (; y < y2; y += gap)
         {
-            for (var tx = x + gap; tx < x2; tx += gap)
+            for (var tx = x; tx < x2; tx += gap)
             {
-                ctx.moveTo(tx, y);
-                ctx.lineTo(tx + 1, y + 1);
+                ctx.fillRect(tx, y, 1, 1);
             }
 
-            ctx.moveTo(x, y);
-            ctx.lineTo(x + 1, y + 1);
+            ctx.fillRect(x, y, 1, 1);
         }
-
-        ctx.stroke();
     };
 
     TextureHelper.Rectangle.Lines = {};

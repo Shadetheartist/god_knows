@@ -15,7 +15,7 @@ define(['core/viewport/texture-helper'], function (TextureHelper)
         }
 
         this.frontContext = this.contexts[0];
-        this.backContext = this.contexts[this.contexts.length];
+        this.backContext = this.contexts[this.contexts.length - 1];
 
     }
 
