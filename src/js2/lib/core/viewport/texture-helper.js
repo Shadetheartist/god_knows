@@ -130,12 +130,9 @@ define(function ()
         var lx2 = 0;
         var ly2 = 0;
 
-        var i = 0;
 
-        while (i < 100 && x1 < BX2)
+        while (x1 < BX2)
         {
-            i++;
-
             lx1 = x1;
             ly1 = y1;
 
@@ -175,7 +172,6 @@ define(function ()
 
         }
 
-
     };
 
 
@@ -209,12 +205,8 @@ define(function ()
         var lx2 = 0;
         var ly2 = 0;
 
-        var i = 0;
-
-        while (i < 100 && x1 < BX2)
+        while (x1 < BX2)
         {
-            i++;
-
             lx1 = x1;
             ly1 = y1;
 

@@ -15,20 +15,20 @@ define(['core/viewport/texture-helper'], function(TextureHelper)
 
 	Viewport.prototype.test = function()
 	{
-		var rect = {x: 100, y: 100, w: 200, h: 300};
+		var rect = {x: 0, y: 0, w: 1000, h: 1000};
 
 		this.ctx.strokeStyle = "#000";
 
 		this.ctx.strokeRect(rect.x, rect.y, rect.w, rect.h);
 
-       // TextureHelper.Rectangle.dots(this.ctx, rect, 5);
+       	TextureHelper.Rectangle.dots(this.ctx, rect, 10);
 
-       	//TextureHelper.Rectangle.Lines.vertical(this.ctx, rect, 20);
-		//TextureHelper.Rectangle.Lines.horizontal(this.ctx, rect, 8);
+       	TextureHelper.Rectangle.Lines.vertical(this.ctx, rect, 50);
+		TextureHelper.Rectangle.Lines.horizontal(this.ctx, rect, 50);
         //TextureHelper.Rectangle.Lines.diagonal(this.ctx, rect, 10, {x: 1, y: 1});
         //TextureHelper.Rectangle.Lines.diagonal(this.ctx, rect,10, {x: 1, y: -1});
-        TextureHelper.Rectangle.Lines.diagonal(this.ctx, rect, 6, {x: 0.2, y: 1});
-        //TextureHelper.Rectangle.Lines.diagonal(this.ctx, rect, 20, {x: -1, y: 1});
+        TextureHelper.Rectangle.Lines.diagonal(this.ctx, rect, 10, {x: 0.5, y: 1});
+        TextureHelper.Rectangle.Lines.diagonal(this.ctx, rect, 10, {x: -0.5, y: 1});
 	};
 
 	Viewport.prototype.renderResolutionGrid = function(gap, opacity)
@@ -72,7 +72,7 @@ define(['core/viewport/texture-helper'], function(TextureHelper)
 	};
 
 	Viewport.defaultConfig = {
-		resolution: {w: 1000, h: 800}
+		resolution: {w: 1000, h: 1000}
 	};
 
 	return Viewport;
