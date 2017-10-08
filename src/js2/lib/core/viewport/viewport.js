@@ -21,14 +21,14 @@ define(['core/viewport/texture-helper'], function(TextureHelper)
 
 		this.ctx.strokeRect(rect.x, rect.y, rect.w, rect.h);
 
-        TextureHelper.Rectangle.dots(this.ctx, rect, 10);
+       // TextureHelper.Rectangle.dots(this.ctx, rect, 5);
 
-        //TextureHelper.Rectangle.Lines.vertical(this.ctx, rect, 8);
+       	//TextureHelper.Rectangle.Lines.vertical(this.ctx, rect, 20);
 		//TextureHelper.Rectangle.Lines.horizontal(this.ctx, rect, 8);
         //TextureHelper.Rectangle.Lines.diagonal(this.ctx, rect, 10, {x: 1, y: 1});
         //TextureHelper.Rectangle.Lines.diagonal(this.ctx, rect,10, {x: 1, y: -1});
-        TextureHelper.Rectangle.Lines.diagonal(this.ctx, rect, 10, {x: 1, y: 1});
-        TextureHelper.Rectangle.Lines.diagonal(this.ctx, rect, 10, {x: -1, y: 1});
+        TextureHelper.Rectangle.Lines.diagonal(this.ctx, rect, 6, {x: 0.2, y: 1});
+        //TextureHelper.Rectangle.Lines.diagonal(this.ctx, rect, 20, {x: -1, y: 1});
 	};
 
 	Viewport.prototype.renderResolutionGrid = function(gap, opacity)
