@@ -1,8 +1,9 @@
 define(['core/editor/editor', 'core/viewport/viewport'], function()
 {
-	function Game(viewport){
-		this.name = 'ayy'
-		this.viewport = viewport || null;
+	function Game(viewport, editor){
+		this.name = 'ayy';
+        this.viewport = viewport || null;
+        this.editor = editor || null;
 	}
 
 	Game.prototype.stat = function()
@@ -14,7 +15,3 @@ define(['core/editor/editor', 'core/viewport/viewport'], function()
 
 	return Game;
 });
-
-
-
-

@@ -17,7 +17,7 @@ define(['core/viewport/texture-helper'], function(TextureHelper)
 	{
 		var rect = {x: 0, y: 0, w: 1000, h: 1000};
 
-		this.ctx.strokeStyle = "#000";
+		this.ctx.strokeStyle = "rgba(0,0,0, 0.1)";
 
 		this.ctx.strokeRect(rect.x, rect.y, rect.w, rect.h);
 
@@ -38,7 +38,7 @@ define(['core/viewport/texture-helper'], function(TextureHelper)
 
 		var ctx = this.ctx;
 
-		ctx.strokeStyle = "rgba(0, 0, 255, " + opacity + ")"
+		ctx.strokeStyle = "rgba(0, 0, 255, " + opacity + ")";
 		ctx.lineWidth   = 1;
 
 		var vpWidth  = this.config.resolution.w;

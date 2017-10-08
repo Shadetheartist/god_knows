@@ -1,11 +1,11 @@
 body{
-    background: #484848;
+    background: #cbcbcb;
 }
 
 canvas {
     border: 1px solid #0b0b0b;
     background: #d9d9d9;
-    //width: 100%;
+    width: 100%;
     object-fit: contain;
 
 }
