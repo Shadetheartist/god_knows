@@ -105,7 +105,6 @@ define(['core/game', 'core/viewport/viewport', 'core/editor/editor', 'core/viewp
         rect.x += rect.w + spacing;
         TextureHelper.Rectangle.Lines.diagonal(this.viewport.backContext, rect, 2, {x: -1, y: 1});
 
-
         rect.x += rect.w + spacing;
         TextureHelper.Rectangle.Lines.diagonal(this.viewport.backContext, rect, 1, {x: -1, y: 1});
 
