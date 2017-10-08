@@ -1,10 +1,4 @@
-requirejs.config({
-	//By default load any module IDs from js/lib
-	baseUrl: 'js2/lib'
-
-});
-
-require(['god-knows/god-knows', 'core/viewport/viewport', 'core/editor/editor', 'core/viewport/texture-helper'], function(GodKnows, Viewport, Editor, TextureHelper) {
+require(['god-knows/god-knows'], function(GodKnows) {
 
     var gameElem = $('game').first();
 

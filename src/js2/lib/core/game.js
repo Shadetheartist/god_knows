@@ -1,17 +1,46 @@
-define(['core/editor/editor', 'core/viewport/viewport'], function()
+define(['core/editor/editor', 'core/viewport/viewport'], function ()
 {
-	function Game(viewport, editor){
-		this.name = 'ayy';
+    function Game(viewport, editor)
+    {
+        this.name = 'ayy';
         this.viewport = viewport || null;
         this.editor = editor || null;
-	}
 
-	Game.prototype.stat = function()
-	{
-		console.group('Game [' + this.name + '] stats');
-		console.log(this);
-		console.groupEnd();
-	};
+        this.updateTick = 0;
+        this.renderTick = 0;
+    }
 
-	return Game;
+    Game.prototype._update = function ()
+    {
+        this.updateTick++;
+        this.update();
+    };
+
+    Game.prototype._render = function ()
+    {
+        this.renderTick++;
+        this.render();
+    };
+
+    Game.prototype.update = function ()
+    {
+    };
+
+    Game.prototype.render = function ()
+    {
+    };
+
+    Game.prototype.tick = function ()
+    {
+        this._update();
+        this._render();
+    };
+
+    Game.prototype.run = function ()
+    {
+        this.tick();
+        window.requestAnimationFrame(this.run.bind(this));
+    };
+
+    return Game;
 });

@@ -27,34 +27,6 @@ define(['core/viewport/texture-helper'], function (TextureHelper)
         }
     };
 
-    Viewport.prototype.test = function ()
-    {
-        var ctx0 = this.contexts[0];
-        var ctx1 = this.contexts[1];
-        var ctx2 = this.contexts[2];
-
-
-        var rect = {x: 0, y: 0, w: 500, h: 500};
-
-
-        ctx1.strokeStyle = "rgba(0,0,255, 1)";
-        ctx1.strokeRect(rect.x, rect.y, rect.w, rect.h);
-
-        ctx0.strokeStyle = "rgba(0,0,0, 1)";
-        ctx0.strokeRect(rect.x, rect.y, rect.w, rect.h);
-
-
-
-        ctx0.strokeStyle = "rgba(0,0,0, 0.1)";
-
-        TextureHelper.Rectangle.dots(ctx0, rect, 10);
-        TextureHelper.Rectangle.Lines.vertical(ctx0, rect, 50);
-        TextureHelper.Rectangle.Lines.horizontal(ctx0, rect, 50);
-        TextureHelper.Rectangle.Lines.diagonal(ctx0, rect, 10, {x: 0.5, y: 1});
-        TextureHelper.Rectangle.Lines.diagonal(ctx0, rect, 10, {x: -0.5, y: 1});
-
-    };
-
     Viewport.prototype.renderResolutionGrid = function (gap, opacity)
     {
         gap = gap || 10;
