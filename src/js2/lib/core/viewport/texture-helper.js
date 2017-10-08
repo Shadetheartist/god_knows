@@ -130,6 +130,7 @@ define(function ()
         var lx2 = 0;
         var ly2 = 0;
 
+        ctx.beginPath();
 
         while (x1 < BX2)
         {
@@ -163,14 +164,13 @@ define(function ()
                 ly2 += opp;
             }
 
-            ctx.beginPath();
             ctx.moveTo(lx1, ly1);
             ctx.lineTo(lx2, ly2);
-            ctx.stroke();
 
             x1 += gap;
 
         }
+        ctx.stroke();
 
     };
 
@@ -204,6 +204,7 @@ define(function ()
 
         var lx2 = 0;
         var ly2 = 0;
+        ctx.beginPath();
 
         while (x1 < BX2)
         {
@@ -238,14 +239,13 @@ define(function ()
                 ly2 += opp;
             }
 
-            ctx.beginPath();
             ctx.moveTo(lx1, ly1);
             ctx.lineTo(lx2, ly2);
-            ctx.stroke();
 
             x1 += gap;
 
         }
+        ctx.stroke();
 
 
     };
