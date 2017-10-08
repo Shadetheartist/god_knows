@@ -1,0 +1,49 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/site.css"/>
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>God Knows</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <game>
+                <div class="col-md-10">
+                    <viewport></viewport>
+                </div>
+                <div class="col-md-2">
+                    <editor></editor>
+                </div>
+            </game>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="js2/require.js"></script>
+<script src="js2/app.js"></script>
+<script>
+    require(['god-knows/test/test-patterns',  'core/viewport/viewport', 'core/editor/editor'], function(TestPatterns, Viewport, Editor) {
+
+        var gameElem = $('game').first();
+
+        var viewportElem = gameElem.find('viewport').eq(0)[0];
+        var viewport = new Viewport(viewportElem);
+
+        new TestPatterns(viewport);
+
+    });
+</script>
+</body>
+
+</html>

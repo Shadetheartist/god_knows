@@ -1,4 +1,4 @@
-require(['god-knows/god-knows'], function(GodKnows) {
+require(['god-knows/god-knows', 'core/viewport/viewport', 'core/editor/editor', 'core/viewport/texture-helper'], function(GodKnows, Viewport, Editor, TextureHelper) {
 
     var gameElem = $('game').first();
 
