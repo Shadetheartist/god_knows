@@ -32,11 +32,14 @@ define(function ()
     TextureHelper.Rectangle.Lines.horizontal = function (ctx, bounds, gap)
     {
         gap = gap || 10;
+
         var x = bounds.x;
         var x2 = bounds.x + bounds.w;
 
         var y = bounds.y;
         var y2 = bounds.y + bounds.h;
+
+        y += gap;
 
         ctx.beginPath();
 
@@ -58,6 +61,8 @@ define(function ()
 
         var y = bounds.y;
         var y2 = bounds.y + bounds.h;
+
+        x += gap;
 
         ctx.beginPath();
 

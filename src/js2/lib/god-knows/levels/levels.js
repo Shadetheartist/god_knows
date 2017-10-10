@@ -4,7 +4,7 @@ define(['core/scene/level-data', 'core/scene/level-builder', 'core/util/bluebird
         new LevelData(
             'level 1',
             'images/levels/1.png',
-            10,
+            20,
             {
                 x: 0,
                 y: 0,

@@ -4,9 +4,6 @@ define(['core/util/bluebird'], function ()
     {
         this.canvas = document.createElement('canvas');
         $(this.canvas).attr('hidden');
-        $(this.canvas).attr('width', 100);
-        $(this.canvas).attr('height', 100);
-        this.ctx = this.canvas.getContext('2d');
         this.images = [];
     }
 
@@ -20,7 +17,7 @@ define(['core/util/bluebird'], function ()
         this.images.push(image);
     };
 
-    LevelLoader.prototype.loadLevel = function (url, bounds)
+    LevelLoader.prototype.loadLevel = function (level)
     {
         var loader = this;
 
@@ -28,14 +25,20 @@ define(['core/util/bluebird'], function ()
         {
             var levelData = [];
 
-            loader.loadImage(url, function ()
+            loader.loadImage(level.url, function ()
             {
+                //no fucking clue why but these are supposed to be swapped, unless im dumb as fuck
+                $(loader.canvas).attr('width', level.bounds.h);
+                $(loader.canvas).attr('height', level.bounds.w);
+                var ctx = loader.canvas.getContext('2d');
+
                 createImageBitmap(this).then(function (image)
                 {
-                    loader.ctx.drawImage(image, 0, 0);
-                    var imageData = loader.ctx.getImageData(0, 0, loader.canvas.height, loader.canvas.width);
+                    ctx.drawImage(image, 0, 0);
+                    var imageData = ctx.getImageData(0, 0, loader.canvas.height, loader.canvas.width);
                     var arrLen = imageData.width * imageData.height * 4;
                     l(imageData);
+                    var bounds = level.bounds;
                     for (var i = 0; i < arrLen; i += 4)
                     {
                         var r = imageData.data[i];
