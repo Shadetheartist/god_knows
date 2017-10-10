@@ -24,7 +24,7 @@ define(['core/scene/level-loader', 'core/scene/level', 'core/util/bluebird'], fu
         return new Promise(function (resolve)
         {
             builder.loader
-                .loadLevel(rawLevel.url)
+                .loadLevel(rawLevel.url, rawLevel.bounds)
                 .then(function (levelData)
                 {
                     var level = new Level();

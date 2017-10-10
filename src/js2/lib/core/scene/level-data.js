@@ -7,7 +7,8 @@ define(function ()
         this.bounds = bounds;
         this.scale = scale || 50;
 
-        if(url === null){
+        if (url === null)
+        {
             throw 'level url is null';
         }
     }
@@ -15,7 +16,13 @@ define(function ()
     LevelData.defaultOptions = {
         name: 'unnamed',
         scale: 100,
-        url: null //image url
+        url: null, //image url
+        bounds: {
+            x: 0,
+            y: 0,
+            w: 100,
+            h: 100
+        }
     };
 
     return LevelData;

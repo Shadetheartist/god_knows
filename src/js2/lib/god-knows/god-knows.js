@@ -10,6 +10,8 @@ define(['core/game', 'core/viewport/viewport', 'core/editor/editor', 'god-knows/
 
     var promise = new Promise(function (resolve)
     {
+        viewport.renderResolutionGrid(10);
+
         levelsPromise.then(function (levels)
         {
             l(levels);

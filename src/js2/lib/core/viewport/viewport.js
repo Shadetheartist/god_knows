@@ -30,11 +30,12 @@ define(['core/viewport/texture-helper'], function (TextureHelper)
     Viewport.prototype.renderResolutionGrid = function (gap, opacity)
     {
         gap = gap || 10;
-        opacity = opacity || 0.15;
+        opacity = opacity || 0.25;
 
         var ctx = this.frontContext;
 
         ctx.strokeStyle = "rgba(0, 0, 255, " + opacity + ")";
+
         ctx.lineWidth = 1;
 
         var vpWidth = this.config.resolution.w;
