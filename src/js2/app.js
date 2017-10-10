@@ -3,3 +3,5 @@ requirejs.config({
 	baseUrl: 'js2/lib'
 
 });
+
+var l = console.log;

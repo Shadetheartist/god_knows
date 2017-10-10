@@ -16,6 +16,11 @@
     <div class="row">
         <div class="col-md-12">
             <game>
+                <loader>
+                    <img class="level" id="level-1" src="images/levels/1.png"/>
+
+                </loader>
+
                 <div class="col-md-10">
                     <viewport></viewport>
                 </div>
@@ -27,12 +32,29 @@
     </div>
 </div>
 
+<canvas id="loaderCanvas" width="100" height="100"></canvas>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script src="js2/require.js"></script>
 <script src="js2/app.js"></script>
+<script>
+    require(['god-knows/god-knows', 'core/viewport/viewport', 'core/editor/editor'], function (GodKnows, Viewport, Editor)
+    {
+        var gameElem = $('game').first();
 
+        var viewportElem = gameElem.find('viewport').eq(0)[0];
+        var viewport = new Viewport(viewportElem);
+
+        var editorElem = gameElem.find('editor').eq(0)[0];
+        var editor = new Editor(editorElem);
+
+        var game = new GodKnows(viewport, editor);
+
+        game.run();
+    });
+
+</script>
 </body>
 
 </html>
