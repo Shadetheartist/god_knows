@@ -32,8 +32,8 @@ define(['core/util/bluebird'], function ()
                 {
                     loader.ctx.drawImage(image, 0, 0);
                     var imageData = loader.ctx.getImageData(0, 0, loader.canvas.height, loader.canvas.width);
-
-                    for (var i = 0; i < imageData.width * imageData.height; i += 4)
+                    var arrLen = imageData.width * imageData.height * 4;
+                    for (var i = 0; i < arrLen; i += 4)
                     {
                         var r = imageData.data[i];
                         var g = imageData.data[i + 1];
@@ -42,8 +42,8 @@ define(['core/util/bluebird'], function ()
 
                         if (a !== 0)
                         {
-                            var x = i % imageData.width / 4;
-                            var y = Math.floor(i / imageData.width) / 4;
+                            var x = (i / 4) % imageData.width;
+                            var y = Math.floor((i / 4) / imageData.width);
                             levelData.push({x: x, y: y});
                         }
                     }

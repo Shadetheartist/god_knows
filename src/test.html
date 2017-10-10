@@ -16,11 +16,6 @@
     <div class="row">
         <div class="col-md-12">
             <game>
-                <loader>
-                    <img class="level" id="level-1" src="images/levels/1.png"/>
-
-                </loader>
-
                 <div class="col-md-10">
                     <viewport></viewport>
                 </div>
@@ -39,19 +34,12 @@
 <script src="js2/require.js"></script>
 <script src="js2/app.js"></script>
 <script>
-    require(['god-knows/god-knows', 'core/viewport/viewport', 'core/editor/editor'], function (GodKnows, Viewport, Editor)
+    require(['god-knows/god-knows'], function (game)
     {
-        var gameElem = $('game').first();
-
-        var viewportElem = gameElem.find('viewport').eq(0)[0];
-        var viewport = new Viewport(viewportElem);
-
-        var editorElem = gameElem.find('editor').eq(0)[0];
-        var editor = new Editor(editorElem);
-
-        var game = new GodKnows(viewport, editor);
-
-        game.run();
+        game.then(function (game)
+        {
+            game.run();
+        });
     });
 
 </script>

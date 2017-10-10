@@ -21,7 +21,7 @@ define(['core/scene/level-loader', 'core/scene/level', 'core/util/bluebird'], fu
     {
         var builder = this;
 
-        var promise = new Promise(function (resolve)
+        return new Promise(function (resolve)
         {
             builder.loader
                 .loadLevel(rawLevel.url)
@@ -33,7 +33,7 @@ define(['core/scene/level-loader', 'core/scene/level', 'core/util/bluebird'], fu
                     {
                         var x = levelData[i].x * rawLevel.scale;
                         var y = levelData[i].y * rawLevel.scale;
-                        scaledData.push({x: x, y: y});
+                        scaledData.push({x: x, y: y, w: rawLevel.scale, h: rawLevel.scale});
                     }
 
                     level.coords = scaledData;
@@ -42,8 +42,6 @@ define(['core/scene/level-loader', 'core/scene/level', 'core/util/bluebird'], fu
                 });
 
         });
-
-        return promise;
 
     };
 
