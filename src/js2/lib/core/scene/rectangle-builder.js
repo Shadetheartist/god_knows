@@ -49,7 +49,7 @@ define(['core/viewport/texture-helper', 'core/geo/rectangle'], function (Texture
                         y: this.y,
                         w: this.w,
                         h: this.h
-                    }, this.scale / 2, 2);
+                    }, this.scale / 2, 1);
                 };
             case 2:
                 return function (ctx)
@@ -61,7 +61,7 @@ define(['core/viewport/texture-helper', 'core/geo/rectangle'], function (Texture
                         y: this.y,
                         w: this.w,
                         h: this.h
-                    }, this.scale / 4, 2);
+                    }, this.scale / 2.5, 1);
 
                 };
             case 3:
