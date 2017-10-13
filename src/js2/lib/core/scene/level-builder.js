@@ -1,4 +1,4 @@
-define(['core/scene/level-loader', 'core/scene/geo-builder', 'core/scene/level', 'core/util/bluebird'], function (LevelLoader, GeoBuilder, Level, Promise)
+define(['core/scene/level-loader', 'core/scene/geo-builder', 'core/scene/level', 'core/viewport/cache-helper', 'core/util/bluebird'], function (LevelLoader, GeoBuilder, Level, CacheHelper, Promise)
 {
     function LevelBuilder()
     {
@@ -30,15 +30,19 @@ define(['core/scene/level-loader', 'core/scene/geo-builder', 'core/scene/level',
                 {
                     builder.geoBuilder.setScale(rawLevel.scale);
                     var level = new Level();
-                    var geo = [];
                     var rect = null;
+                    var w = rawLevel.bounds.w * rawLevel.scale;
+                    var h = rawLevel.bounds.h * rawLevel.scale;
+
+                    var tCtx = CacheHelper.getTempContext(w, h);
+
                     for (var i = 0; i < levelData.length; i++)
                     {
-                        rect = builder.geoBuilder.buildGeo(levelData[i]);
-                        geo.push(rect);
+                        rect = builder.geoBuilder.buildRect(levelData[i]);
+                        rect.render(tCtx);
                     }
 
-                    level.coords = geo;
+                    level.backGround = tCtx;
 
                     resolve(level)
                 });

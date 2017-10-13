@@ -11,7 +11,7 @@ define(['core/viewport/texture-helper', 'core/geo/rectangle'], function (Texture
         this.scale = scale;
     };
 
-    GeoBuilder.prototype.buildGeo = function (data)
+    GeoBuilder.prototype.buildRect = function (data)
     {
         data.x = data.x * this.scale;
         data.y = data.y * this.scale;
