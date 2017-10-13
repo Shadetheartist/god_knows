@@ -17,7 +17,7 @@ define(['core/game', 'core/viewport/viewport', 'core/editor/editor', 'god-knows/
             l(levels);
 
             var game = new Game(viewport, editor);
-            game.viewport.backContext.translate(800, -1000);
+            game.viewport.backContext.translate(0, -1000);
 
 
             game.update = function ()
@@ -27,7 +27,7 @@ define(['core/game', 'core/viewport/viewport', 'core/editor/editor', 'god-knows/
 
             game.render = function ()
             {
-                this.viewport.backContext.clearRect(0, 0, 2000, 2000);
+                this.viewport.backContext.clearRect(0, 0, 5000, 5000);
                 this.viewport.backContext.drawImage(levels[0].backGround.canvas, 0, 0);
             };
 

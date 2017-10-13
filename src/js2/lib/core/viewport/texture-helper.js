@@ -7,9 +7,10 @@ define(function ()
     TextureHelper.Rectangle = {};
 
 
-    TextureHelper.Rectangle.dots = function (ctx, bounds, gap)
+    TextureHelper.Rectangle.dots = function (ctx, bounds, gap, size)
     {
         gap = gap || 10;
+        size = size || 1;
         var x = bounds.x;
         var x2 = bounds.x + bounds.w;
 
@@ -20,10 +21,10 @@ define(function ()
         {
             for (var tx = x; tx < x2; tx += gap)
             {
-                ctx.fillRect(tx, y, 1, 1);
+                ctx.fillRect(tx, y, size, size);
             }
 
-            ctx.fillRect(x, y, 1, 1);
+            ctx.fillRect(x, y, size, size);
         }
     };
 
@@ -39,11 +40,9 @@ define(function ()
         var y = bounds.y;
         var y2 = bounds.y + bounds.h;
 
-        y += gap;
-
         ctx.beginPath();
 
-        for (; y < y2; y += gap)
+        for (; y < y2 - 1; y += gap)
         {
             ctx.moveTo(x, y);
             ctx.lineTo(x2, y);
@@ -62,11 +61,9 @@ define(function ()
         var y = bounds.y;
         var y2 = bounds.y + bounds.h;
 
-        x += gap;
-
         ctx.beginPath();
 
-        for (; x < x2; x += gap)
+        for (; x < x2 - 1; x += gap)
         {
             ctx.moveTo(x, y);
             ctx.lineTo(x, y2);

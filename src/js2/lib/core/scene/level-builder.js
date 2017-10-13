@@ -1,4 +1,4 @@
-define(['core/scene/level-loader', 'core/scene/geo-builder', 'core/scene/level', 'core/viewport/cache-helper', 'core/util/bluebird'], function (LevelLoader, GeoBuilder, Level, CacheHelper, Promise)
+define(['core/scene/level-loader', 'core/scene/rectangle-builder', 'core/scene/level', 'core/viewport/cache-helper', 'core/util/bluebird'], function (LevelLoader, GeoBuilder, Level, CacheHelper, Promise)
 {
     function LevelBuilder()
     {
