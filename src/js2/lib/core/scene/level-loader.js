@@ -70,8 +70,16 @@ define(['core/util/bluebird'], function ()
                                 continue;
                             }
 
-
-                            levelData.push({x: x, y: y});
+                            levelData.push(
+                                {
+                                    x: x,
+                                    y: y,
+                                    r: r,
+                                    g: g,
+                                    b: b,
+                                    a: a
+                                }
+                            );
                         }
                     }
                 }).then(function ()

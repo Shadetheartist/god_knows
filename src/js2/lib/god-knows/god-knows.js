@@ -31,10 +31,11 @@ define(['core/game', 'core/viewport/viewport', 'core/editor/editor', 'god-knows/
                 for (var i = 0; i < levels[0].coords.length; i++)
                 {
                     var coords = levels[0].coords[i];
-                    TextureHelper.Rectangle.Lines.diagonal(this.viewport.backContext, coords, 10, {x: 0.5, y: 1});
-                    TextureHelper.Rectangle.Lines.diagonal(this.viewport.backContext, coords, 10, {x: -0.5, y: 1});
-                    TextureHelper.Rectangle.Lines.horizontal(this.viewport.backContext, coords, 10);
-                    TextureHelper.Rectangle.Lines.vertical(this.viewport.backContext, coords, 10);
+                    coords.render(this.viewport.backContext);
+                    //TextureHelper.Rectangle.Lines.diagonal(this.viewport.backContext, coords, 5, {x: -0.25, y: 1});
+                    //TextureHelper.Rectangle.Lines.diagonal(this.viewport.backContext, coords, 5, {x: 0.25, y: 1});
+                    //TextureHelper.Rectangle.Lines.horizontal(this.viewport.backContext, coords, 5);
+                    //TextureHelper.Rectangle.Lines.vertical(this.viewport.backContext, coords, 5);
                     //this.viewport.backContext.strokeRect(coords.x, coords.y, coords.w, coords.h);
                 }
             };

@@ -1,8 +1,9 @@
-define(['core/scene/level-loader', 'core/scene/level', 'core/util/bluebird'], function (LevelLoader, Level, Promise)
+define(['core/scene/level-loader', 'core/scene/geo-builder', 'core/scene/level', 'core/util/bluebird'], function (LevelLoader, GeoBuilder, Level, Promise)
 {
     function LevelBuilder()
     {
         this.loader = new LevelLoader();
+        this.geoBuilder = new GeoBuilder();
     }
 
     LevelBuilder.prototype.buildLevels = function (rawLevels)
@@ -27,16 +28,17 @@ define(['core/scene/level-loader', 'core/scene/level', 'core/util/bluebird'], fu
                 .loadLevel(rawLevel)
                 .then(function (levelData)
                 {
+                    builder.geoBuilder.setScale(rawLevel.scale);
                     var level = new Level();
-                    var scaledData = [];
+                    var geo = [];
+                    var rect = null;
                     for (var i = 0; i < levelData.length; i++)
                     {
-                        var x = levelData[i].x * rawLevel.scale;
-                        var y = levelData[i].y * rawLevel.scale;
-                        scaledData.push({x: x, y: y, w: rawLevel.scale, h: rawLevel.scale});
+                        rect = builder.geoBuilder.buildGeo(levelData[i]);
+                        geo.push(rect);
                     }
 
-                    level.coords = scaledData;
+                    level.coords = geo;
 
                     resolve(level)
                 });
