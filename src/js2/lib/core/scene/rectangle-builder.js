@@ -31,7 +31,7 @@ define(['core/viewport/texture-helper', 'core/geo/rectangle'], function (Texture
 
     RectangleBuilder.prototype.getRenderer = function (data)
     {
-        var type = Math.ceil(data.a / (256 / this.typeDivisor));
+        var type = Math.floor(data.a / (255 / this.typeDivisor));
 
         switch (type)
         {
