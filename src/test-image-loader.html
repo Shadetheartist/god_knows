@@ -1,0 +1,54 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/site.css"/>
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>God Knows Test Image Loader</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <canvas id="test-canvas" width="1000" height="1000"></canvas>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="js2/require.js"></script>
+<script src="js2/app.js"></script>
+<script>
+    require(['core/image/image-loader'], function(ImageLoader) {
+
+        var imageLoader = new ImageLoader();
+
+        var ctx = $('#test-canvas')[0].getContext('2d');
+
+        imageLoader.getRGBAData({
+            url: 'images/church-scene.png'
+        }).then(function (data)
+        {
+            l(data);
+            for(var i = 0; i < data.length; i++){
+                var datum = data[i];
+
+                ctx.fillStyle = 'rgba(' + datum.r + ',' + datum.g + ',' + datum.b + ',' + datum.a + ')';
+
+                ctx.fillRect(datum.x, datum.y, 1, 1);
+            }
+        });
+
+
+    });
+</script>
+</body>
+
+</html>
