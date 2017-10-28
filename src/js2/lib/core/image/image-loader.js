@@ -61,7 +61,7 @@ define(['core/util/bluebird'], function (Promise)
                             var r = imageData.data[i];
                             var g = imageData.data[i + 1];
                             var b = imageData.data[i + 2];
-                            var a = imageData.data[i + 3];
+                            var a = imageData.data[i + 3] / 255; //alpha takes 0 < a < 1
 
                             //4 = dimensions of pixel (rgba)
                             var x = o % bounds.w;
